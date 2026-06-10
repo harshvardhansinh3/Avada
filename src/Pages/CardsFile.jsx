@@ -1,16 +1,33 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { CardsData } from './CardsData.js'
 
 export const CardsFile = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div style={{
-      display:'flex',
-      gap:'50px',
-      // margin:"100px",
-      padding:"30px 150px",
-      flexWrap:"wrap",
-      justifyContent:'center'
-    }}>
+    <div
+  style={{
+   display: "flex",
+    gap: isMobile ? "20px" : "50px",
+    margin: isMobile ? "0" : "80px auto",
+    padding: isMobile ? "0 0" : "0 50px",
+    flexDirection: isMobile ? "column" : "row",
+    flexWrap: isMobile ? "nowrap" : "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+  }}
+>
       
 
         {CardsData.map((card)=>(
@@ -19,7 +36,7 @@ export const CardsFile = () => {
           <div 
           key={card.id}
           style={{
-            width: "320px",
+            width: isMobile ? "100%" : "320px",
             position:"relative",
             // border: "1px solid #ddd",
             borderRadius: "10px",
@@ -43,7 +60,7 @@ export const CardsFile = () => {
               
 
              
-              <h3>{card.title}</h3><br />
+              <h3>{card.title}</h3>
 
           <p style={{
             lineHeight:1.5

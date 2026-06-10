@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState, useEffect} from 'react'
 import dash1 from '../assets/dash1.jpg'
 import dash2 from '../assets/dash2.png'
 import dash3 from '../assets/dash3.png'
@@ -11,34 +11,56 @@ import photo3 from '../assets/photo3.png'
 
 
 export const Header = ({refs}) => {
+
+    const [isMobile,setIsMobile] = useState(window.innerWidth <=768);
+
+   useEffect(()=>{
+    const handleResize=()=>{
+        setIsMobile(window.innerWidth <=768);
+    };
+
+    window.addEventListener("resize",handleResize);
+    return()=>window.removeEventListener("resize",handleResize);
+
+   },[]);
+
+
   return (
     <section>
 
     <div style={{
-        margin:"80px 100px 80px 150px",
+        margin: isMobile? "20px" : "80px 100px 80px 150px",
         display:"flex",
+        flexDirection: isMobile? "column":"row",
+        alignItems: isMobile?"enter":"flex-start",
+        gap:"40px",
         justifyContent:"space-between",
     }} >
 
+
+            {/* header left side content */}
+
+
         <div style={{
-            marginTop:'100px',
+            marginTop:isMobile? "20px":'100px',
         }}>
 
             <h1 style={{
-                fontSize:"40px"
+                fontSize:isMobile? "28px":"40px",
             }}>The Ultimate</h1> <br />
             <h1 style={{
-                fontSize:"40px"
+                fontSize:isMobile? "28px":"40px",
             }}>Creative </h1> <br />
             <h1 style={{
-                fontSize:"40px"
+                fontSize:isMobile? "28px":"40px"
             }}>Website Builder</h1>
 
             <p style={{
                 marginTop:"10px",
                 fontSize:"20px",
                 lineHeight:1.5,
-                
+                fontSize:isMobile? "16px":"20px",
+                textAlign:isMobile?"center":"left",
 
             }}> Trusted by beginner, marketers & professionals;
                 <br />Built with usability and performance in mind. 
@@ -56,6 +78,7 @@ export const Header = ({refs}) => {
                 borderRadius:"10px",
                 fontSize:"20px",
                 marginTop:"20px",
+
                 // fontWeight:"bold",
                 
             }}  >Start Designing </button>
@@ -72,6 +95,9 @@ export const Header = ({refs}) => {
             <div style={{
                 display:'flex',
                 justifyContent:'space-between',
+                flexDirection:isMobile?"column":"row",
+                gap:"20px",
+                textAlign:isMobile?"center":"left",
             }}>
 
                 <div>
@@ -88,7 +114,7 @@ export const Header = ({refs}) => {
                     <p style={{
                         marginTop:'10px',
                         paddingLeft:"5px"
-                    }}>Avarage 5*Star Reviews</p>
+                    }}>Avarage 5-Star Reviews</p>
 
                 </div>
 
@@ -99,12 +125,15 @@ export const Header = ({refs}) => {
 
         </div>
 
+                    {/* header right side image */}
+
+
         <div>
 
            
             
             <img src={dash6} alt="photo" style={{
-                width:"800px",
+                width: isMobile? "100%":"800px",
                 position:"relative",
                 borderRadius:"10px",
             }} />
@@ -122,9 +151,10 @@ export const Header = ({refs}) => {
     ref={refs.beginnerRef}
      style={{
         display:'flex',
+        flexDirection:isMobile?"column":"row",
         justifyContent:'space-between',
         // gap:"20px",
-        margin:"80px 100px 80px 150px",
+        margin: isMobile? "20px" : "80px 100px 80px 150px",
     }}>
 
 
@@ -134,27 +164,35 @@ export const Header = ({refs}) => {
         <div style={{
             backgroundColor:"#f489e4",
             borderRadius:"10px",
-            
+            marginTop:isMobile? "20px":'0px',
             border:'none',
-            width:"400px",
+            
+            width:isMobile? "100%":"400px",
             padding:"30px 40px 30px 40px",
             textAlign:"center",
             // position:"absolute",
 
 
         }}>
+
                 <p>For Beginers</p> <br />
-                    <h1>Lunch your first <br /> website</h1> <br />
+
+                    <h1 style={{
+                    fontSize:isMobile? "26px":"35px",
+                   }}>Lunch your first <br /> website</h1> <br />
                         <img src={photo1    } alt="photo" style={{
-                            width:"250px"
+                            width:isMobile? "200px":"350px"
                         }} />
 
 
                         <div style={{
                             gap:'20px',
                             display:"flex",
+                            alignItems:isMobile? "center":"normal",
                             marginTop:"20px",
                             justifyContent:"space-between",
+                            flexDirection:isMobile?"column":"row",
+
                         }}>
 
 
@@ -194,7 +232,7 @@ export const Header = ({refs}) => {
                         borderRadius:"5px",
                         border:"none",
                         width:"150px",
-                        marginTop:"10px",
+                        marginTop:isMobile? "":"10px",
                         backgroundColor:"#ff00d9"
                     }}> Support</p>
 
@@ -222,18 +260,20 @@ export const Header = ({refs}) => {
         <div style={{
             backgroundColor:"#eacd82",
             borderRadius:"10px",
-            width:"400px",
+                marginTop:isMobile? "20px":'0px',
             border:'none',
-            
+            width:isMobile? "100%":"400px",
             padding:"30px 40px 30px 40px",
             textAlign:"center"
 
 
         }}>
                 <p>For Marketers</p> <br />
-                    <h1>Generates Leads And <br /> Conversations</h1> <br />
+                    <h1 style={{
+                    fontSize:isMobile? "26px":"35px",
+                   }}>Generates Leads And <br /> Conversations</h1> <br />
                         <img src={photo2    } alt="photo" style={{
-                            width:"250px"
+                            width:isMobile? "200px":"350px"
                         }} />
 
 
@@ -241,6 +281,8 @@ export const Header = ({refs}) => {
                             gap:'20px',
                             display:"flex",
                             marginTop:"20px",
+                            flexDirection:isMobile?"column":"row",
+                            alignItems:isMobile? "center":"normal",
                             justifyContent:"space-between",
                         }}>
 
@@ -307,25 +349,30 @@ export const Header = ({refs}) => {
         <div style={{
             backgroundColor:"#82cbea",
             borderRadius:"10px",
-            
+            width:isMobile? "100%":"400px",
             border:'none',
-            width:"400px",
+            marginTop:isMobile? "20px":'0px',
             padding:"30px 40px 30px 40px",
             textAlign:"center",
+            
 
 
         }}>
                 <p>For Professionals</p>
-                   <br /> <h1>  Take Your Projects  <br /> To The Next Level</h1> <br />
+                   <br /> <h1 style={{
+                    fontSize:isMobile? "26px":"35px",
+                   }}>  Take Your Projects  <br /> To The Next Level</h1> <br />
                         <img src={photo3    } alt="photo" style={{
-                            width:"250px"
+                            width:isMobile? "200px":"350px"
                         }} />
 
 
                         <div style={{
                             gap:'20px',
                             display:"flex",
+                            flexDirection:isMobile?"column":"row",
                             marginTop:"20px",
+                            alignItems:isMobile? "center":"normal",
                             justifyContent:"space-between",
                         }}>
 

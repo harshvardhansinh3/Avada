@@ -1,8 +1,21 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import photo2 from '../assets/photo2.jpg'
 import squarebird from '../assets/squarebird.png'
 
 export const FAQ = () => {
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   const faq=[
     {
@@ -29,12 +42,14 @@ export const FAQ = () => {
 
       <div style={{
         display:'flex',
+        flexDirection: isMobile ? "column" : "row",
         // justifyContent:'space-between',
       }}>
 
         <div>
           <img src={photo2  } alt="photo"  style={{
-            width:"700px",
+            width: isMobile ? "100%" : "700px",
+            height: "auto",
             // borderRadius:"110px",
             // margin:"50px 0 50px 0",
             // height:'500px'
@@ -45,13 +60,13 @@ export const FAQ = () => {
 
         <div style={{
           backgroundColor:"#dcce34",
-          padding:"80px  ",
+          padding: isMobile ? " 20px" : "80px ",
         }}>
 
           <p style={{
             padding:"10px",
             lineHeight:1.5,
-            fontSize:"22px",
+            fontSize: isMobile ? "16px" : "22px",
             paddingBottom:"50px",
             marginBottom:"20px",
             borderBottom:"2px solid #8f8f8f"
@@ -82,18 +97,29 @@ export const FAQ = () => {
 
       </div>
 
+
+
+
+
+
+
+
+
+              {/* FAQ Section */}
+
+
         <div>
 
 
 
           <div style={{
-            padding:"100px 100px ",
-            margin:"100px 150px 20px 150px ",
+            padding: isMobile ? "20px" : "50px",
+            margin:isMobile?"0":"50px 150px 20px 150px ",
             cursor:"pointer"
           }}>
 
             <h1 style={{
-              fontSize:'60px'
+              fontSize: isMobile ? "32px" : "60px"
             }}>Frequently Asked Questions</h1>
 
 

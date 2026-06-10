@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import card1 from "../assets/card1.png";
 import card002 from "../assets/card2.png";
 import card003 from "../assets/card3.png";
@@ -20,17 +20,26 @@ import { CardsFile } from "./CardsFile";
 
 export const Cards = () => {
   const [activeImage, setActiveImage] = useState(card1);
+  const [isMobile,setIsMobile] = useState(window.innerWidth <=768);
+
+  useEffect(()=>{
+    const handleResize =()=>{
+      setIsMobile(window.innerWidth <=768);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  },[]);
+
 
   const buttonStyle = {
-    padding: "10px 30px",
+    padding:isMobile ? "5px 10px" : "10px 30px",
     border: "none",
     backgroundColor: "#eeeeee",
     borderRadius: "5px",
     fontWeight: "bold",
     margin: "10px",
-    width: "250px",
-    fontSize:'18px',
-    marginRight:"10px",
+    width: isMobile ? "100px" : "250px",
+    fontSize: isMobile ? "12px" : "18px",
     cursor: "pointer",
   };
 
@@ -39,7 +48,7 @@ export const Cards = () => {
       <div>
         <div
           style={{
-            padding: "80px 150px ",
+            padding:isMobile ? "10px " : "80px 150px ",
           }}
         >
 
@@ -53,15 +62,15 @@ export const Cards = () => {
           >
 
               <img src={avadashortlogo  } alt="photo" style={{
-                        width:"100px"
+                        width:isMobile ? "70px" : "100px"
                       }} />
 
             <h1 style={{
-                        fontSize:"55px"
+                        fontSize: isMobile ? "30px" : "55px"
                       }}>Design Anything, Build Everything</h1>
 
             <p style={{
-                        fontSize:"22px"
+                        fontSize: isMobile ? "16px" : "22px"
                       }}>
               Design and launch your website fast & no coding knowledge is
               required.
@@ -71,14 +80,16 @@ export const Cards = () => {
           <div
             style={{
               display: "flex",
-              gap: "100px",  
+              justifyContent: "space-between",
               marginTop: "50px",
-              paddingLeft:"50px"
+              paddingLeft:isMobile ? "0" : "50px",
+              
             }}
           >
             {/* Buttons */}
             <div style={{ 
-              width:"200px"
+              width:isMobile ? "150px" : "400px",
+              
              }}>
               <button
                 style={buttonStyle}
@@ -150,10 +161,10 @@ export const Cards = () => {
                 src={activeImage}
                 alt="Selected Card"
                 style={{
-                  width: "100%",
-                  maxWidth: "800px",
+                  width:isMobile ? "100%" : "100%",
+                  // maxWidth: "800px",
                   borderRadius: "10px",
-                  paddingTop:"30px"
+                  paddingTop:"30px",
                 }}
               />
             </div>
@@ -177,17 +188,17 @@ export const Cards = () => {
 
 
                   <div style={{
-                    padding: "80px 150px 0  150px ",
+                    padding:isMobile ? "10px" : "80px 150px 0  150px ",
                     textAlign:"center"
                   }}>
 
                     <div >
                       <h1 style={{
-                        fontSize:"55px"
+                        fontSize: isMobile ? "40px" : "55px"
                       }}>All-In-One Website Builder</h1><br />
 
                       <p  style={{
-                        fontSize:"22px"
+                        fontSize: isMobile ? "18px" :  "22px"
                       }}>Design And Build World-Class Professional Websites With Ease.</p>
                     </div>
 
@@ -232,22 +243,24 @@ export const Cards = () => {
  
                       <div style={{
                         textAlign:"center",
-                        padding:"80px 150px "
+                        padding:"80px 150px ",
+                        padding: isMobile ? "40px 20px" : "80px 150px",
                       }}>
 
 
-                        <h1 style={{fontSize:"55px"}}>1,063,585 Websites Owners <br />
+                        <h1 sstyle={{ fontSize: isMobile ? "28px" : "55px" }}>1,063,585 Websites Owners <br />
                         Trust AVADA
                         </h1><br />
 
-                        <p style={{fontSize:"22px"}}>The #1 selling Websites Builder on ThemeForest for 13+ years.</p>
+                        <p style={{ fontSize: isMobile ? "16px" : "22px" }}>The #1 selling Websites Builder on ThemeForest for 13+ years.</p>
 
 
 
                           <div style={{
-                            padding:"30px 150px",
+                            padding: isMobile ? "10px" : "30px 150px",
                             display:"flex",
                             gap:"50px",
+                            flexDirection: isMobile ? "column" : "row",
                             lineHeight:1.5,
                             marginTop:"20px",
                           }}>

@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import logo from '../assets/Avada-logo.png'
 import footerimg from '../assets/card10.jpg'
 
 export const Footer = () => {
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const [formData, setFormData] = useState({
     email:'',
@@ -35,14 +47,15 @@ export const Footer = () => {
 
       <div style={{
         position:'absolute',
-        margin:"100px 150px 20px 150px ",
+        margin:isMobile?"200px 0 20px 0":"100px 150px 10px 150px ",
         backgroundColor:"#89c47d",
         // transition:"50%",
-        padding:"100px 100px ",
+        padding: isMobile ? "20px" : "100px 100px ",
         borderRadius:"10px",
         // marginBottom:"5000px",
         border:"none",
         display:"flex",
+        flexDirection: isMobile ? "column" : "row",
         transform:"translateY(-110%)",
         justifyContent:"space-between",
         zIndex:"1000",
@@ -51,12 +64,14 @@ export const Footer = () => {
 
         <div>
           <h1 style={{
-            lineHeight:1.4
+            lineHeight:1.4,
+            fontSize: isMobile ? "28px" : "40px"
           }}>Build Successfull <br /> Websites with Avada </h1> 
 
           <p style={{
             lineHeight:1.5,
-            marginTop:"10px"
+            marginTop:"10px",
+            fontSize: isMobile ? "16px" : "20px"
           }}>Wheather you are a bigginer, marketer, or professionals,<br />
           Avada has the tools & Resources you can rely on  to succeed.</p>
 
@@ -83,8 +98,9 @@ export const Footer = () => {
 
         <div>
           <img src={footerimg } alt="footerimg" style={{
-            width:"600px",
+            width:isMobile ? "100%" : "600px",
             height:"400px",
+            marginTop:isMobile ? "20px" : "0",
             borderRadius:"10px"
           }} />
         </div>
@@ -98,7 +114,7 @@ export const Footer = () => {
       {/* footer */}
 
       <div style={{
-        padding:"100px 150px 10px 150px",
+        padding:isMobile ? "100px 10px 10px 10px" : "150px 150px 10px 150px",
         backgroundColor:"#000000",
         position:'relative',
         marginTop:"600px"
@@ -113,15 +129,20 @@ export const Footer = () => {
 
           <div style={{
             display:"flex",
+            flexDirection: isMobile ? "column" : "row",
             justifyContent:"space-between",
              borderBottom:"2px solid #aeaeae",
-             paddingBottom:"50px"
+             paddingBottom:"30px",
+             justifyContent: "space-between",
+              gap: "30px",
+    // borderBottom: "1px solid #f4f4f4",
+    // paddingBottom: "40px",
             
           }}>
 
 
             <div>
-                <img src={logo} alt="logo" />
+                <img src={logo} alt="logo" style={{paddingTop:isMobile ? "50px" : "0"}}/>
             </div>
 
             <div style={{
