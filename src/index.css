@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Merriweather:wght@300;400;700&family=Rubik:wght@400;500;700&display=swap');
+
+/* Headings */
+h1 {
+  font-family: 'Archivo Black', sans-serif;
+}
+
+/* Paragraphs */
+p {
+  font-family: 'Merriweather', serif;
+}
+
+/* Buttons */
+button {
+  font-family: 'Rubik', sans-serif;
+}
 * {
   margin: 0;
   padding: 0;
